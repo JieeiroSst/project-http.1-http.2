@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package project_grpc;
+
+option go_package = "/.;proto";
+
+import "google/api/annotations.proto";
+
+message Message {
+  string value = 1;
+}
+
+message SumRequest {
+  int32 num1 = 1;
+  int32 num2 = 2;
+}
+
+message SumResponse {
+  int32 result = 1;
+}
+
+service Service {
+  rpc Tall(Message) returns (Message) {
+    option (google.api.http) = {
+      get: "",
+      body: "*"
+    };
+  }
+  rpc Sum(SumRequest) returns (SumResponse) {
+    option (google.api.http) = {
+      get: "/v1/sum"
+    };
+  }
+  rpc Subtraction(SumRequest) returns (SumResponse) {
+    option (google.api.http) = {
+      get: "/v1/subtraction"
+    };
+  }
+  rpc Multiplication(SumRequest) returns (SumResponse) {
+    option (google.api.http) = {
+      get: "/v1/multiplication"
+    };
+  }
+  rpc Division(SumRequest) returns (SumResponse) {
+    option (google.api.http) = {
+      get: "/v1/division"
+    };
+  }
+}
